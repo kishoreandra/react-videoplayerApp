@@ -1,7 +1,10 @@
 import React from "react";
 
 class SearchBar extends React.Component {
-  state = { searchTerm: "" };
+  constructor(props) {
+    super(props);
+    this.state = { searchTerm: "" };
+  }
 
   onUserInput = (event) => {
     this.setState({ searchTerm: event.target.value });
@@ -9,6 +12,7 @@ class SearchBar extends React.Component {
 
   onUserSearch = (event) => {
     event.preventDefault();
+    this.props.onFormSubmit(this.state.searchTerm);
   };
 
   render() {
