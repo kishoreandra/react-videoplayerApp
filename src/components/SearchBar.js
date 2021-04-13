@@ -1,37 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { searchTerm: "" };
-  }
+const SearchBar = ({ onFormSubmit }) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  onUserInput = (event) => {
-    this.setState({ searchTerm: event.target.value });
+  const onUserInput = (event) => {
+    setSearchTerm(event.target.value);
   };
 
-  onUserSearch = (event) => {
+  const onUserSearch = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state.searchTerm);
+    onFormSubmit(searchTerm);
   };
 
-  render() {
-    return (
-      <div className="ui secondary inverted segment">
-        <form onSubmit={this.onUserSearch}>
-          <div className="ui fluid icon input">
-            <input
-              onChange={this.onUserInput}
-              type="text"
-              value={this.state.searchTerm}
-              placeholder="Search..."
-            />
-            <i className="search icon"></i>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="ui secondary inverted segment">
+      <form onSubmit={onUserSearch}>
+        <div className="ui fluid icon input">
+          <input
+            onChange={onUserInput}
+            type="text"
+            value={searchTerm}
+            placeholder="Search..."
+          />
+          <i className="search icon"></i>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default SearchBar;
